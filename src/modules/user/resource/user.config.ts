@@ -1,9 +1,9 @@
 import { FilterOperator, FilterSuffix, PaginateConfig } from "nestjs-paginate"
-import { UsertEntity } from "src/entity/user/user.entity"
+import { UserEntity } from 'src/entity';
 
 const dataBd = ['id', 'name', 'phone', 'email', 'n_document', 'gender', 'birthdate']
 
-export const userConfig: PaginateConfig<UsertEntity> = {
+export const UserConfig: PaginateConfig<UserEntity> = {
     sortableColumns: ['id', 'name', 'phone', 'email', 'n_document', 'gender', 'birthdate'],
     nullSort: 'last',
     defaultSortBy: [['id', 'DESC']],
