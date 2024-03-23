@@ -47,3 +47,10 @@ export const CRUDOParam = {
   putName: 'id',
   deleteName: 'id',
 }
+
+export const CRUDOLogger = {
+  titlePost: 'ERROR INSERT',
+  titlePut: 'ERROR UPDATE',
+  titleDelete: 'ERROR DELETE',
+  descripcionId: 'No se encontró la data con ese id'
+}
