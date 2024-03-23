@@ -1,19 +1,19 @@
 import { FilterOperator, FilterSuffix, PaginateConfig } from "nestjs-paginate"
 import { VehicleEntity } from 'src/entity';
 
-const dataBd = ['id', 'n_bus', 'license_plate', 'state', 'seats_available']
+const dataBd = ['id', 'busNumber', 'licensePlate', 'state', 'seatsAvailable']
 
 export const VehicleConfig: PaginateConfig<VehicleEntity> = {
-    sortableColumns: ['id', 'n_bus', 'license_plate', 'state', 'seats_available'],
+    sortableColumns: ['id', 'busNumber', 'licensePlate', 'state', 'seatsAvailable'],
     nullSort: 'last',
     defaultSortBy: [['id', 'DESC']],
-    searchableColumns: ['id', 'n_bus', 'license_plate', 'state', 'seats_available'],
+    searchableColumns: ['id', 'busNumber', 'licensePlate', 'state', 'seatsAvailable'],
     select: dataBd,
     filterableColumns: {
         id: [FilterOperator.EQ, FilterSuffix.NOT],
-        n_bus: [FilterOperator.EQ, FilterSuffix.NOT],
-        license_plate: [FilterOperator.EQ, FilterSuffix.NOT],
+        busNumber: [FilterOperator.EQ, FilterSuffix.NOT],
+        licensePlate: [FilterOperator.EQ, FilterSuffix.NOT],
         state: [FilterOperator.EQ, FilterSuffix.NOT],
-        seats_available: [FilterOperator.EQ, FilterSuffix.NOT]
+        seatsAvailable: [FilterOperator.EQ, FilterSuffix.NOT]
     },
 }

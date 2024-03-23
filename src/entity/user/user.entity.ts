@@ -16,7 +16,7 @@ export class UserEntity extends BaseEntity  {
     email: string | null;
 
     @Column({ type: 'character varying', name: 'n_document', length: 100 })
-    n_document: string | null;
+    documentNumber: string | null;
 
     @Column({ type: 'character varying', name: 'gender', length: 1 })
     gender: string | null;

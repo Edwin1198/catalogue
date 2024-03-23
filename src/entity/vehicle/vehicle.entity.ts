@@ -7,15 +7,15 @@ export class VehicleEntity extends BaseEntity {
     id: number | null;
 
     @Column({ type: 'character varying', name: 'n_bus', length: 50 })
-    n_bus: string | null;
+    busNumber: string | null;
 
     @Column({ type: 'character varying', name: 'license_plate', length: 50 })
-    license_plate: string | null;
+    licensePlate: string | null;
 
     @Column({ type: 'character varying', name: 'state', length: 50 })
     state: string | null;
 
     @Column("numeric", { name: 'seats_available' })
-    seats_available: number | null;
+    seatsAvailable: number | null;
 
 }
