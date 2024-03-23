@@ -19,13 +19,13 @@ export class UserService {
     }
     async post(data: UserDto): Promise<UserDto | {}> {
         try {
-            await this.repository
+            const newData = await this.repository
                 .createQueryBuilder()
                 .insert()
                 .into(UserEntity)
                 .values({ ...data, birthdate: moment.utc(data.birthdate).format('YYYY-MM-DD HH:mm:ss') })
                 .execute()
-            return data;
+            return { ...data, id: newData.identifiers[0].id };
         } catch (error) {
             Logger.error(error.message, CRUDOLogger.titlePost)
             return {}

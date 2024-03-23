@@ -13,7 +13,7 @@ export class VehicleDto {
         example: '12',
         required: false,
     })
-    n_bus: string;
+    busNumber: string;
 
     @Type(() => String)
     @IsOptional()
@@ -23,7 +23,7 @@ export class VehicleDto {
         example: 'F5u-597',
         required: false,
     })
-    license_plate: string;
+    licensePlate: string;
 
     @Type(() => String)
     @IsOptional()
@@ -43,7 +43,7 @@ export class VehicleDto {
         example: '30',
         required: false,
     })
-    seats_available: number;
+    seatsAvailable: number;
     
 }
 

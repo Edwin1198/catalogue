@@ -43,7 +43,7 @@ export class UserDto {
         example: '71120253',
         required: false,
     })
-    n_document: string;
+    documentNumber: string;
 
     @Type(() => String)
     @IsOptional()

@@ -5,6 +5,7 @@ import { ApiOkPaginatedResponse, ApiPaginationQuery, Paginate, PaginateQuery, Pa
 import { UserDto, UserDtoId, UserConfig } from './resource';
 import { UserEntity } from 'src/entity';
 import { CRUDOBody, CRUDOParam, CRUDOResponse, CRUDOperation } from 'src/config/helper/message-res.helper';
+import { MessagePattern } from '@nestjs/microservices';
 
 @ApiCreatedResponse()
 @ApiTags('USUARIO')
@@ -66,5 +67,10 @@ export class UserController {
     @Delete(':id')
     async delete(@Param('id', ParseIntPipe) id: number): Promise<{}> {
         return this.service.delete(id);
+    }
+
+    @MessagePattern({ cmd: 'usercreation' })
+    async usercreation(data: UserDto): Promise<UserDto | {}> {
+        return this.service.post(data);
     }
 }
