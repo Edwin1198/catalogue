@@ -1,7 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
 
 @Entity("city", { database: 'travel_db', schema: "public" })
-export class CityEntity {
+export class CityEntity extends BaseEntity {
 
     @PrimaryGeneratedColumn({ type: 'numeric', name: 'id_city' })
     id: number | null;
