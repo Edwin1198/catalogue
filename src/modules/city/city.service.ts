@@ -2,48 +2,47 @@ import { Logger, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PaginateQuery, Paginated, paginate } from 'nestjs-paginate';
 import { Repository } from 'typeorm'
-import { UserConfig, UserDto } from './resource';
-import { UserEntity } from 'src/entity';
-import * as moment from 'moment-timezone';
+import { CityConfig, CityDto } from './resource';
+import { CityEntity } from 'src/entity';
 
 @Injectable()
-export class UserService {
+export class CityService {
     constructor(
-        @InjectRepository(UserEntity)
-        private readonly repository: Repository<UserEntity>
+        @InjectRepository(CityEntity)
+        private readonly repository: Repository<CityEntity>
     ) { }
-    async findAll(query: PaginateQuery): Promise<Paginated<UserEntity>> {
+    async findAll(query: PaginateQuery): Promise<Paginated<CityEntity>> {
         const queryBuilder = this.repository.createQueryBuilder('table');
-        return paginate(query, queryBuilder, UserConfig)
+        return paginate(query, queryBuilder, CityConfig)
     }
-    async post(data: UserDto): Promise<UserDto | {}> {
+    async post(data: CityDto): Promise<CityDto | {}> {
         try {
             await this.repository
                 .createQueryBuilder()
                 .insert()
-                .into(UserEntity)
-                .values({ ...data, birthdate: moment.utc(data.birthdate).format('YYYY-MM-DD HH:mm:ss') })
+                .into(CityEntity)
+                .values({ ...data })
                 .execute()
             return data;
         } catch (error) {
-            Logger.error(error.message, 'ERROR INSERT USER')
+            Logger.error(error.message, 'ERROR INSERT')
             return {}
         }
     }
-    async put({ id, data }: { id: number, data: UserDto }): Promise<UserDto | {}> {
+    async put({ id, data }: { id: number, data: CityDto }): Promise<CityDto | {}> {
         try {
             const { affected } = await this.repository
                 .createQueryBuilder()
-                .update(UserEntity)
-                .set({ ...data, birthdate: moment.utc(data.birthdate).format('YYYY-MM-DD HH:mm:ss') })
+                .update(CityEntity)
+                .set({ ...data })
                 .where("id = :id", { id })
                 .execute();
             if (affected === 0) {
                 Logger.warn('No se encontró la data con ese id')
             }
-            return { ...data, birthdate: moment.utc(data.birthdate).format('YYYY-MM-DD HH:mm:ss') }
+            return { ...data }
         } catch (error) {
-            Logger.error(error.message, 'ERROR UPDATE USER')
+            Logger.error(error.message, 'ERROR UPDATE')
             return {}
         }
     }
@@ -53,7 +52,7 @@ export class UserService {
             const { affected } = await this.repository
                 .createQueryBuilder()
                 .delete()
-                .from(UserEntity)
+                .from(CityEntity)
                 .where("id = :id", { id })
                 .execute();
             if (affected === 0) {
@@ -61,7 +60,7 @@ export class UserService {
             }
             return {}
         } catch (error) {
-            Logger.error(error.message, 'ERROR DELETE USER')
+            Logger.error(error.message, 'ERROR DELETE')
             return {}
         }
     }

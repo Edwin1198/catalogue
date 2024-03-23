@@ -1,36 +1,36 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put } from '@nestjs/common';
-import { UserService } from './user.service';
+import { VehicleService } from './vehicle.service';
 import { ApiBody, ApiCreatedResponse, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ApiOkPaginatedResponse, ApiPaginationQuery, Paginate, PaginateQuery, Paginated, PaginatedSwaggerDocs } from 'nestjs-paginate';
-import { UserDto, UserDtoId, UserConfig } from './resource';
-import { UserEntity } from 'src/entity';
+import { VehicleDto, VehicleDtoId, VehicleConfig } from './resource';
+import { VehicleEntity } from 'src/entity';
 import { CRUDOBody, CRUDOParam, CRUDOResponse, CRUDOperation } from 'src/config/helper/message-res.helper';
 
 @ApiCreatedResponse()
-@ApiTags('USUARIO')
-@Controller('user')
-export class UserController {
-    constructor(private readonly service: UserService) { }
+@ApiTags('VEHICULO')
+@Controller('vehicle')
+export class VehicleController {
+    constructor(private readonly service: VehicleService) { }
     @ApiOperation({ summary: 'Paginación de todos los registros' })
-    @ApiOkPaginatedResponse(UserDtoId, UserConfig)
-    @ApiPaginationQuery(UserConfig)
-    @PaginatedSwaggerDocs(UserDtoId, UserConfig)
+    @ApiOkPaginatedResponse(VehicleDtoId, VehicleConfig)
+    @ApiPaginationQuery(VehicleConfig)
+    @PaginatedSwaggerDocs(VehicleDtoId, VehicleConfig)
     @Get()
-    async finAll(@Paginate() query: PaginateQuery): Promise<Paginated<UserEntity>> {
+    async finAll(@Paginate() query: PaginateQuery): Promise<Paginated<VehicleEntity>> {
         return await this.service.findAll(query);
     }
     @ApiOperation({ summary: CRUDOperation.post })
     @ApiBody({
-        type: UserDto,
+        type: VehicleDto,
         description: CRUDOBody.postDescription,
     })
     @ApiResponse({
         status: CRUDOResponse.postStatus,
         description: CRUDOResponse.postDescription,
-        type: UserDto,
+        type: VehicleDto,
     })
     @Post()
-    async post(@Body() data: UserDto): Promise<UserDto | {}> {
+    async post(@Body() data: VehicleDto): Promise<VehicleDto | {}> {
         return this.service.post(data);
     }
     @ApiOperation({ summary: CRUDOperation.put })
@@ -40,16 +40,16 @@ export class UserController {
         type: Number
     })
     @ApiBody({
-        type: UserDto,
+        type: VehicleDto,
         description: CRUDOBody.putDescription,
     })
     @ApiResponse({
         status: CRUDOResponse.putStatus,
         description: CRUDOResponse.putDescription,
-        type: UserDto,
+        type: VehicleDto,
     })
     @Put(':id')
-    async put(@Param('id', ParseIntPipe) id: number, @Body() data: UserDto): Promise<UserDto | {}> {
+    async put(@Param('id', ParseIntPipe) id: number, @Body() data: VehicleDto): Promise<VehicleDto | {}> {
         return this.service.put({ id, data });
     }
     @ApiOperation({ summary: CRUDOperation.delete })
