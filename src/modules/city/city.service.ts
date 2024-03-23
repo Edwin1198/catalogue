@@ -4,6 +4,7 @@ import { PaginateQuery, Paginated, paginate } from 'nestjs-paginate';
 import { Repository } from 'typeorm'
 import { CityConfig, CityDto } from './resource';
 import { CityEntity } from 'src/entity';
+import { CRUDOLogger } from 'src/config/helper/message-res.helper';
 
 @Injectable()
 export class CityService {
@@ -25,7 +26,7 @@ export class CityService {
                 .execute()
             return data;
         } catch (error) {
-            Logger.error(error.message, 'ERROR INSERT')
+            Logger.error(error.message, CRUDOLogger.titlePost)
             return {}
         }
     }
@@ -38,11 +39,11 @@ export class CityService {
                 .where("id = :id", { id })
                 .execute();
             if (affected === 0) {
-                Logger.warn('No se encontró la data con ese id')
+                Logger.warn(CRUDOLogger.descripcionId, CRUDOLogger.titlePut)
             }
             return { ...data }
         } catch (error) {
-            Logger.error(error.message, 'ERROR UPDATE')
+            Logger.error(error.message, CRUDOLogger.titlePut)
             return {}
         }
     }
@@ -56,11 +57,11 @@ export class CityService {
                 .where("id = :id", { id })
                 .execute();
             if (affected === 0) {
-                Logger.warn('No se encontró la data con ese id')
+                Logger.warn(CRUDOLogger.descripcionId, CRUDOLogger.titleDelete)
             }
             return {}
         } catch (error) {
-            Logger.error(error.message, 'ERROR DELETE')
+            Logger.error(error.message, CRUDOLogger.titleDelete)
             return {}
         }
     }

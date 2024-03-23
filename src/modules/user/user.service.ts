@@ -5,6 +5,7 @@ import { Repository } from 'typeorm'
 import { UserConfig, UserDto } from './resource';
 import { UserEntity } from 'src/entity';
 import * as moment from 'moment-timezone';
+import { CRUDOLogger } from 'src/config/helper/message-res.helper';
 
 @Injectable()
 export class UserService {
@@ -26,7 +27,7 @@ export class UserService {
                 .execute()
             return data;
         } catch (error) {
-            Logger.error(error.message, 'ERROR INSERT USER')
+            Logger.error(error.message, CRUDOLogger.titlePost)
             return {}
         }
     }
@@ -39,11 +40,11 @@ export class UserService {
                 .where("id = :id", { id })
                 .execute();
             if (affected === 0) {
-                Logger.warn('No se encontró la data con ese id')
+                Logger.warn(CRUDOLogger.descripcionId, CRUDOLogger.titlePut)
             }
             return { ...data, birthdate: moment.utc(data.birthdate).format('YYYY-MM-DD HH:mm:ss') }
         } catch (error) {
-            Logger.error(error.message, 'ERROR UPDATE USER')
+            Logger.error(error.message, CRUDOLogger.titlePut)
             return {}
         }
     }
@@ -57,11 +58,11 @@ export class UserService {
                 .where("id = :id", { id })
                 .execute();
             if (affected === 0) {
-                Logger.warn('No se encontró la data con ese id')
+                Logger.warn(CRUDOLogger.descripcionId, CRUDOLogger.titleDelete)
             }
             return {}
         } catch (error) {
-            Logger.error(error.message, 'ERROR DELETE USER')
+            Logger.error(error.message, CRUDOLogger.titleDelete)
             return {}
         }
     }
