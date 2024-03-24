@@ -1,2 +1,2 @@
-export * from './user.config'
-export * from './user.dto'
+export * from './user.config';
+export * from './user.dto';

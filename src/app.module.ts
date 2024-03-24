@@ -44,13 +44,13 @@ import { DateInterceptor } from './config/core/dateInterceptor';
         new winston.transports.Console({ level: 'debug' }),
       ],
     }),
-    IndexModule
+    IndexModule,
   ],
   providers: [
     {
       provide: APP_INTERCEPTOR,
       useClass: DateInterceptor,
-    }
+    },
   ],
 })
-export class AppModule { }
+export class AppModule {}

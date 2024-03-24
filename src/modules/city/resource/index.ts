@@ -1,2 +1,2 @@
-export * from './city.config'
-export * from './city.dto'
+export * from './city.config';
+export * from './city.dto';

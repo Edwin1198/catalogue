@@ -4,10 +4,6 @@ import { CityModule } from './city/city.module';
 import { VehicleModule } from './vehicle/vehicle.module';
 
 @Module({
-    imports: [
-        UserModule,
-        CityModule,
-        VehicleModule
-    ]
+  imports: [UserModule, CityModule, VehicleModule],
 })
-export class IndexModule { }
+export class IndexModule {}

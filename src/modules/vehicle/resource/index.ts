@@ -1,2 +1,2 @@
-export * from './vehicle.config'
-export * from './vehicle.dto'
+export * from './vehicle.config';
+export * from './vehicle.dto';
