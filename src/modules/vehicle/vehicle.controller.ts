@@ -5,6 +5,7 @@ import { ApiOkPaginatedResponse, ApiPaginationQuery, Paginate, PaginateQuery, Pa
 import { VehicleDto, VehicleDtoId, VehicleConfig } from './resource';
 import { VehicleEntity } from 'src/entity';
 import { CRUDOBody, CRUDOParam, CRUDOResponse, CRUDOperation } from 'src/config/helper/message-res.helper';
+import { MessagePattern } from '@nestjs/microservices';
 
 @ApiCreatedResponse()
 @ApiTags('VEHICULO')
@@ -66,5 +67,10 @@ export class VehicleController {
     @Delete(':id')
     async delete(@Param('id', ParseIntPipe) id: number): Promise<{}> {
         return this.service.delete(id);
+    }
+
+    @MessagePattern({ cmd: 'vehicleView' })
+    async vehicleView(id: number): Promise<VehicleDtoId | {}> {
+        return this.service.vehicleView(id);
     }
 }

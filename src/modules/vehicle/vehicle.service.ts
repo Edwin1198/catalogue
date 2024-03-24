@@ -65,4 +65,17 @@ export class VehicleService {
             return {}
         }
     }
+    
+
+    async vehicleView(id: number): Promise<{}> {
+        try {
+            const queryBuilder = await this.repository.createQueryBuilder()
+                .where("id_vehicle = :id", { id })
+                .getMany();
+            return queryBuilder
+        } catch (error) {
+            Logger.error(error.message, CRUDOLogger.titleDelete)
+            return {}
+        }
+    }
 }
